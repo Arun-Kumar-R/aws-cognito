@@ -11,8 +11,15 @@ Amplify.configure({
         identityPoolRegion: 'us-east-2',
         userPoolId: 'us-east-2_wSwfNHiZC',
         userPoolWebClientId: '2flvubsspmfn5n1juv0adb83nq',
+        oauth: {
+          domain: 'authdemoz.auth.us-east-2.amazoncognito.com',
+          redirectSignIn: 'http://localhost:3000/',
+          redirectSignOut: 'http://localhost:3000/',
+          responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
+      }
     }
   });
+  
 
   async function handleSignIn({email, password}) {
     try {
@@ -43,6 +50,11 @@ export default function Signin() {
           <input type="submit" value = "SignIn"/>
           <p>Create new account?<Link to = "/">SignUp</Link></p>
       </form>
+
+      <button onClick = {() => {
+            Auth.federatedSignIn({ provider: 'Google'})
+        }}>Google SignIn</button>
       </div>
+
     );
 }
