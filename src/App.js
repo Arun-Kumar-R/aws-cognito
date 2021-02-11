@@ -1,26 +1,41 @@
 import React from "react";
-import './App.css';
+import "./styles.scss";
+import Amplify from "aws-amplify";
 
-import {BrowserRouter as Router, Route } from 'react-router-dom';
-import Signup from './signup';
-import SignIn from './signin';
-import ConfirmCode from './confirmCode';
-import HomePage from './homePage';
-import SocialAuth from './socialAuth';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Signup from "./screens/signup";
+import SignIn from "./screens/signin";
+import ConfirmCode from "./screens/confirmCode";
+import HomePage from "./screens/homePage";
 
+// Amplify configured
+Amplify.configure({
+  Auth: {
+    identityPoolId: "us-east-2:890369dc-0696-48a9-8c77-b097502df181",
+    region: "us-east-2",
+    identityPoolRegion: "us-east-2",
+    userPoolId: "us-east-2_wSwfNHiZC",
+    userPoolWebClientId: "2flvubsspmfn5n1juv0adb83nq",
+    oauth: {
+      domain: "authdemoz.auth.us-east-2.amazoncognito.com",
+      redirectSignIn: "http://localhost:3000/",
+      redirectSignOut: "http://localhost:3000/",
+      responseType: "token", // or 'token', note that REFRESH token will only be generated when the responseType is code
+    },
+  },
+});
 
 const App = () => {
   return (
     <div className="App">
       <Router>
-          <Route exact path = '/' component = {Signup} />
-          <Route exact path = '/signin' component = {SignIn} />
-          <Route exact path = '/verify-code' component = {ConfirmCode} />
-          <Route exact path = '/welcome-page' component = {HomePage} />
-          <Route exact path = '/social-auth' component = {SocialAuth} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/verify-code" component={ConfirmCode} />
+        <Route exact path="/" component={HomePage} />
       </Router>
     </div>
   );
-}
+};
 
 export default App;
