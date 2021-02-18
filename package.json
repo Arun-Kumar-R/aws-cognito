@@ -1,45 +1,39 @@
 {
-  "name": "aws-cognito-react",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.6.3",
-    "aws-amplify": "^3.3.18",
-    "bootstrap": "^4.6.0",
-    "node-sass": "^5.0.0",
-    "popper.js": "^1.16.1",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.4.3",
-    "react-dom": "^17.0.1",
-    "react-hook-form": "^6.15.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.2",
-    "web-vitals": "^1.1.0"
-  },
+  "name": "aws-cognito",
+  "version": "1.0.0",
+  "description": "User Authentication and Authorization using AWS Cognito",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "nodemon server.js"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arun-Kumar-R/aws-cognito.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [
+    "API",
+    "Authentication",
+    "Authorization",
+    "AWS",
+    "Cognito",
+    "POC"
+  ],
+  "author": "Arun",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/Arun-Kumar-R/aws-cognito/issues"
+  },
+  "homepage": "https://github.com/Arun-Kumar-R/aws-cognito#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.17",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7"
+  },
+  "engines": {
+    "node": "14.15.1",
+    "npm": "6.14.8"
   }
 }
