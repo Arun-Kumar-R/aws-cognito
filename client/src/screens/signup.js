@@ -4,33 +4,25 @@ import { Auth } from "aws-amplify";
 import { Link, useHistory } from "react-router-dom";
 import RegisterImage from "../assets/register.jpg";
 
-// Signup Method
-/* async function signUp({name, email, password}) {
-  try {
-      const { user } = await Auth.signUp({
-          username: email,
-          password,
-          attributes: {
-              name,
-              email
-          }
-      });
-      history.push({pathname: '/verify-code', state: { userName: user?.username }});
-      console.log("*****User successfully Registerd..", user);
-  } catch (error) {
-      console.log('error signing up:', error);
-  }
-} */
+import { registerService } from "../services/auth.services";
 
 const Signup = () => {
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
-  const [user, setUser] = useState(null);
+  const [users, setUser] = useState(null);
+  const [userError, setUserError] = useState("");
 
-  console.log("user state values", user);
   const onSubmit = async (data) => {
     setUser(data);
     await signUp(data);
+    await registerService(data).then(
+      (userData) => {
+        console.log("component", userData);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   async function signUp({ name, email, password }) {
@@ -43,12 +35,14 @@ const Signup = () => {
           email,
         },
       });
+
       history.push({
         pathname: "/verify-code",
         state: { userName: user?.username },
       });
       console.log("*****User successfully Registerd..", user);
     } catch (error) {
+      setUserError(error);
       console.log("error signing up:", error);
     }
   }
@@ -68,7 +62,13 @@ const Signup = () => {
             <div className="col-md-6 col-lg-6 form-signup" data-aos="zoom-in">
               <button
                 onClick={() => {
-                  Auth.federatedSignIn({ provider: "Google" });
+                  Auth.federatedSignIn({ provider: "Google" })
+                    .then((user) => {
+                      console.log(user, "Google auth user......");
+                    })
+                    .catch((err) => {
+                      console.log("google auth error", err);
+                    });
                 }}
                 className="oauth-container google-btn btn darken-4 white black-text"
               >
@@ -144,6 +144,9 @@ const Signup = () => {
                         Password Should be minimum 8 digits and maximum 20*
                       </p>
                     )}
+                  {userError && (
+                    <p className="error-msg">{userError.message}</p>
+                  )}
                 </div>
                 <button type="submit" className="btn login-btn">
                   SignUp

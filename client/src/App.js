@@ -2,11 +2,15 @@ import React from "react";
 import "./styles.scss";
 import Amplify from "aws-amplify";
 
+import { ProtectedRoute } from "./routes/protected";
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Signup from "./screens/signup";
 import SignIn from "./screens/signin";
 import ConfirmCode from "./screens/confirmCode";
 import HomePage from "./screens/homePage";
+import DashboardPage from "./screens/dashboard";
+import JWT from "jsonwebtoken";
 
 // Amplify configured
 Amplify.configure({
@@ -26,6 +30,9 @@ Amplify.configure({
 });
 
 const App = () => {
+  const AccessToken = localStorage.getItem("AccessToken");
+  const decodeAccess = JWT.decode(AccessToken);
+  console.log(decodeAccess);
   return (
     <div className="App">
       <Router>
@@ -33,6 +40,7 @@ const App = () => {
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/verify-code" component={ConfirmCode} />
         <Route exact path="/" component={HomePage} />
+        <ProtectedRoute exact path="/dashboard" component={DashboardPage} />
       </Router>
     </div>
   );

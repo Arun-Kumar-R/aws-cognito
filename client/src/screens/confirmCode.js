@@ -20,7 +20,7 @@ const ConfirmCode = (props) => {
         forceAliasCreation: true,
       });
       console.log("verifyCode*****", verifyCode);
-      history.push("/");
+      history.push("/signin");
     } catch (error) {
       setVerifyError(error);
       console.log("error confirming sign up", error);

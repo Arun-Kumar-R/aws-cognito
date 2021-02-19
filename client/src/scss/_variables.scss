@@ -8,7 +8,6 @@ $green: #6d9773;
 // $orange: #fb641b;
 $orange: #2c9c59;
 
-
 // FONT SIZES
 $font-size-12: 12px;
 $font-size-13: 13px;
@@ -23,18 +22,17 @@ $font-size-22: 22px;
 // FONT BOLD
 $font-weight: bold;
 $font-weight-100: 100;
-$font-weight-500:500;
-$font-weight-600:600;
-$font-weight-700:700;
+$font-weight-500: 500;
+$font-weight-600: 600;
+$font-weight-700: 700;
 
 // FONT FAMILY
-$font-family-roboto: 'Roboto Mono', monospace;
-$font-family-roboto-sans: 'Roboto', sans-serif;
+$font-family-roboto: "Roboto Mono", monospace;
+$font-family-roboto-sans: "Roboto", sans-serif;
 
-$font-family-zilla: 'Zilla Slab';
-
+$font-family-zilla: "Zilla Slab";
 
 // MIXINS
 @mixin easeOut {
-    transition: all 0.8s ease-out;
+  transition: all 0.8s ease-out;
 }

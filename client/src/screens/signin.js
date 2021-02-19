@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Auth } from "aws-amplify";
 import { Link, useHistory } from "react-router-dom";
@@ -7,6 +7,7 @@ import LoginImage from "../assets/login.jpg";
 export default function Signin() {
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
+  const [userErr, setUserErr] = useState("");
 
   const onSubmit = (data) => {
     handleSignIn(data);
@@ -16,8 +17,21 @@ export default function Signin() {
     try {
       const user = await Auth.signIn(email, password);
       console.log("********Authentication successfull", user);
-      history.push("/welcome-page");
+      localStorage.setItem(
+        "IDToken",
+        user?.signInUserSession?.idToken?.jwtToken
+      );
+      localStorage.setItem(
+        "AccessToken",
+        user?.signInUserSession?.accessToken?.jwtToken
+      );
+      localStorage.setItem(
+        "RefreshToken",
+        user?.signInUserSession?.refreshToken?.token
+      );
+      history.push("/dashboard");
     } catch (error) {
+      setUserErr(error);
       console.log("error signing in", error);
     }
   }
@@ -95,6 +109,7 @@ export default function Signin() {
                 <button type="submit" className="btn login-btn">
                   Login
                 </button>
+                {userErr && <p className="error-msg">{userErr.message}</p>}
                 <p>
                   Create account? <Link to="/">Register</Link>
                 </p>
