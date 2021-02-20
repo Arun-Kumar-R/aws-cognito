@@ -1,12 +1,10 @@
 import React from "react";
 import { Auth } from "aws-amplify";
 import { useHistory, Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import JWT from "jsonwebtoken";
 
 export default function Navbar() {
   const history = useHistory();
-  const { handleSubmit } = useForm();
 
   async function handleSignOut() {
     console.log("logout message");
@@ -45,11 +43,17 @@ export default function Navbar() {
           ></lottie-player>{" "}
           <span style={{ marginTop: "5px", marginLeft: "5px" }}>AuthDemo</span>
         </Link>
-        {history?.location?.pathname === "/dashboard" ? (
-          <form className="form-inline" onSubmit={handleSubmit(handleSignOut)}>
+        {history?.location?.pathname === "/dashboard" &&
+        decodeAccess &&
+        decodeID ? (
+          <form className="form-inline">
             <p>{decodeID?.name}</p>
             <Link to="/">
-              <button type="submit" className="btn btn-outline-success">
+              <button
+                type="submit"
+                onClick={handleSignOut}
+                className="btn btn-outline-success"
+              >
                 SignOut
               </button>
             </Link>

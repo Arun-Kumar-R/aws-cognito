@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// @schema model for create User
+// @schema model for create Author
 const Schema = {
   name: {
     type: String,
@@ -19,19 +19,19 @@ const Schema = {
 
 // @set collection name and Schema
 const CollectionName = "Author";
-const UserSchema = mongoose.Schema(Schema);
+const AuthorSchema = mongoose.Schema(Schema);
 
 // @check if User exisits or Not
-UserSchema.pre("save", (next) => {
+AuthorSchema.pre("save", (next) => {
   Author.find({ email: this.email }, (err, docs) => {
     if (!docs.length) {
       next();
     } else {
-      next(new Error("User exsits"));
+      next(new Error("Author exsits"));
     }
   });
 });
 
-const Author = mongoose.model(CollectionName, UserSchema);
+const Author = mongoose.model(CollectionName, AuthorSchema);
 
 module.exports = Author;

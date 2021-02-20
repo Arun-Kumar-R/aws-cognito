@@ -2,11 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
-const path = require("path");
 const Mongoose = require("mongoose");
 
 // Custom APIs
-const UserApi = require("./api/index");
+const AuthorApi = require("./api/index");
 
 // @Custom files
 const env = require("./config/env");
@@ -41,15 +40,7 @@ app.use(bodyParser.json());
 // @log the output request
 app.use(morgan("dev"));
 
-app.use("/api/user", UserApi);
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(__dirname, "client", "build", "index.html");
-  });
-}
+app.use("/api/user", AuthorApi);
 
 // @setup Port
 const PORT = env.apiPort;
