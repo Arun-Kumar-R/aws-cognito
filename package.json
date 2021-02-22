@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Arun-Kumar-R/aws-cognito#readme",
   "dependencies": {
+    "@gitbeaker/node": "^28.0.4",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

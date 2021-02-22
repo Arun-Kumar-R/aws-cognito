@@ -4,6 +4,7 @@ const { check } = require("express-validator");
 
 // CUSTOM MODULES
 const RegisterAPI = require("./user/register");
+const GitlabAPI = require("./user/gitlab");
 
 // HOME ROUTE
 router.get("/", (req, res) => {
@@ -20,5 +21,7 @@ router.post(
   ],
   RegisterAPI
 );
+
+router.get("/get-all-names", GitlabAPI);
 
 module.exports = router;
